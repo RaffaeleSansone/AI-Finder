@@ -4,4 +4,4 @@ Lo scopo del gioco è ordinare in ordine crescente i numeri servendosi del tasse
 
 # Immagine esempio del Puzzle
 
-![Screenshot](puzzle.png)
+![Screenshot](puzzle.jpg)
