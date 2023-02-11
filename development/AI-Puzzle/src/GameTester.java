@@ -21,13 +21,17 @@ public class GameTester {
         int[] initialStateBoard = insertPuzzleGame(reader.nextLine().split(" "));
 
         System.out.println("Con quale algoritmo risolvere puzzle 8 ?\n" +
-                "1 - Ricerca in Profondità\n");
+                "1 - Ricerca in Profondità\n" +
+                "2 - Ricerca Bidirezionale\n");
 
         int choiceSearch = reader.nextInt();
 
         switch (choiceSearch) {
             case 1:
                 RP_Algorithm.search(initialStateBoard); // Ricerca in Profondità
+                break;
+            case 2:
+                RB_Algorithm.search(initialStateBoard); // Ricerca Bidirezionale
                 break;
         }
     }
