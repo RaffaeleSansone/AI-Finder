@@ -22,7 +22,8 @@ public class GameTester {
 
         System.out.println("Con quale algoritmo risolvere puzzle 8 ?\n" +
                 "1 - Ricerca in Profondità\n" +
-                "2 - Ricerca Bidirezionale\n");
+                "2 - Ricerca Bidirezionale\n" +
+                "3 - Ricerca A Star\n");
 
         int choiceSearch = reader.nextInt();
 
@@ -32,6 +33,9 @@ public class GameTester {
                 break;
             case 2:
                 RB_Algorithm.search(initialStateBoard); // Ricerca Bidirezionale
+                break;
+            case 3:
+               AStar_Algorithm.search(initialStateBoard); // Ricerca A*
                 break;
         }
     }

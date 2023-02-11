@@ -71,10 +71,6 @@ public class SearchNode {
         return fCost;
     }
 
-    public void setFCost(double fCost) {
-        this.fCost = fCost;
-    }
-
     private StateNode currentState; // stato corrente del nodo
     private SearchNode parentState; // stato del nodo genitore
     private double cost; // Costo per arrivare al nodo
