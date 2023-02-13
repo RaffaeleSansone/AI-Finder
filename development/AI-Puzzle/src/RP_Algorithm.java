@@ -48,6 +48,7 @@ public class RP_Algorithm
 	 */
 	public static void rp_Search(Stack<SearchNode> s)
 	{
+		long startTime = System.currentTimeMillis(); // inizializzazione timer per controllare durata algoritmo
 		int count = 0; // Variabile che conta il numero di iterazioni dell'algoritmo
 
 		while (!s.isEmpty()) // cicla fin quando lo stack non è vuoto
@@ -85,7 +86,9 @@ public class RP_Algorithm
 				// Viene usato lo stack per tracciare il percorso dall'inizio alla fine
 				Stack<SearchNode> solutionPath = new Stack<SearchNode>();
 				solutionPath.push(tempNode);
-				tempNode = tempNode.getParentState();
+				
+				// controllo per vedere se il nodo è lo stato obiettivo
+				tempNode = tempNode.getParentState() == null ? tempNode : tempNode.getParentState();
 
 				while (tempNode.getParentState() != null)
 				{
@@ -105,6 +108,11 @@ public class RP_Algorithm
 					tempNode.getCurrentState().printNode();
 					System.out.println();
 				}
+				
+				// fine timer e stampo
+				long endTime = System.currentTimeMillis();
+				System.out.println("Durata in millisecondi: " + (endTime - startTime) + "ms");
+				
 				System.out.println("Il costo è: " + tempNode.getCost());
 				System.out.println("Numero di Iterazioni: " + count);
 

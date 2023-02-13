@@ -15,7 +15,7 @@ public class RB_Algorithm {
 
     	// inizializzazione dello stato obiettivo e dello stato iniziale
         int[] winBoard = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0};
-
+        
         initialState = new StatePuzzleGame(board);
         StateNode winState = new StatePuzzleGame(winBoard);
 
@@ -95,7 +95,7 @@ public class RB_Algorithm {
 
     // Metodo utilizzato una volta trovato il punto di contatto tra le due code.
     // Vengono stampati i due percordi che portano alla soluzione
-    private static void pathFound(SearchNode node, int count) {
+    private static void pathFound(SearchNode node, int count, long startTime) {
         
         Stack<SearchNode> solutionPath = new Stack<SearchNode>();
         solutionPath.push(node);
@@ -117,6 +117,11 @@ public class RB_Algorithm {
             node.getCurrentState().printNode();
             System.out.println();
         }
+        
+		// fine timer e stampo
+		long endTime = System.currentTimeMillis();
+		System.out.println("Durata in millisecondi: " + (endTime - startTime) + "ms");
+        
         System.out.println("Il costo è: " + node.getCost());
         System.out.println("Numero di Iterazioni: " + count);
     }
@@ -124,6 +129,7 @@ public class RB_Algorithm {
     // applico l'algoritmo di ricerca bidirezionale utilizzando l'algoritmo di ricerca in
     // ampiezza sulle due code per trovare il punto di contatto
     private static void rb_Search(Queue<SearchNode> fq, Queue<SearchNode> bq) {
+    	long startTime = System.currentTimeMillis(); // inizializzazione timer per controllare durata algoritmo
         int count = 0;
 
         // ciclo fin quando le due code non sono vuote
@@ -139,9 +145,9 @@ public class RB_Algorithm {
                 SearchNode nodeExistOnBQ = queueContainsNode(bq, tempNode);
                 if (tempNode.getCurrentState().isWin() || nodeExistOnBQ != null) {
                     if (nodeExistOnBQ != null) {
-                    	pathFound(nodeExistOnBQ, count); // stampo il nodo di contatto con il relativo percorso da bq
+                    	pathFound(nodeExistOnBQ, count, startTime); // stampo il nodo di contatto con il relativo percorso da bq
                     }
-                    pathFound(tempNode, count); // stampo il nodo di contatto di fq con il relativo percorso
+                    pathFound(tempNode, count, startTime); // stampo il nodo di contatto di fq con il relativo percorso
                     System.exit(0);
                 } else {
                 	ra_search(tempNode, fq);
@@ -160,9 +166,9 @@ public class RB_Algorithm {
                 SearchNode nodeExistOnFQ = queueContainsNode(fq, tempNode);
                 if (isInitialState(tempNode.getCurrentState()) || nodeExistOnFQ != null) {
                     if (nodeExistOnFQ != null) {
-                    	pathFound(nodeExistOnFQ, count); // stampo il nodo di contatto con il relativo percorso da fq
+                    	pathFound(nodeExistOnFQ, count, startTime); // stampo il nodo di contatto con il relativo percorso da fq
                     }
-                    pathFound(tempNode, count); // stampo il nodo di contatto di bq con il relativo percorso
+                    pathFound(tempNode, count, startTime); // stampo il nodo di contatto di bq con il relativo percorso
                     System.exit(0);
                 } else {
                 	ra_search(tempNode, bq);

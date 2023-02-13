@@ -15,6 +15,7 @@ public class AStar_Algorithm
 
 	public static void search(int[] board)
 	{
+		long startTime = System.currentTimeMillis(); // inizializzazione timer per controllare durata algoritmo
 		SearchNode root = new SearchNode(new StatePuzzleGame(board)); // inizializzazione nodo radice
 		
 		// creazione e aggiunta del nodo radice alla coda
@@ -68,19 +69,19 @@ public class AStar_Algorithm
 				 */
 				for (int i = 0; i < nextNodes.size(); i++)
 				{
-					if (lowestNode.getHCost() > nextNodes.get(i).getHCost())
+					if (lowestNode.getFCost() > nextNodes.get(i).getFCost())
 					{
 						lowestNode = nextNodes.get(i);
 					}
 				}
 
-				int lowestValue = (int) lowestNode.getHCost();
+				int lowestValue = (int) lowestNode.getFCost();
 
 				// Vengono aggiunti alla coda tutti i nodi che hanno
 				// lo stesso valore del nodo con valore più basso.
 				for (int i = 0; i < nextNodes.size(); i++)
 				{
-					if (nextNodes.get(i).getHCost() == lowestValue)
+					if (nextNodes.get(i).getFCost() == lowestValue)
 					{
 						q.add(nextNodes.get(i));
 					}
@@ -118,6 +119,11 @@ public class AStar_Algorithm
 					tempNode.getCurrentState().printNode();
 					System.out.println();
 				}
+				
+				// fine timer e stampo
+				long endTime = System.currentTimeMillis();
+				System.out.println("Durata in millisecondi: " + (endTime - startTime) + "ms");
+				
 				System.out.println("Il costo è: " + tempNode.getCost());
 				System.out.println("Numero di Iterazioni: " + count);
 				
